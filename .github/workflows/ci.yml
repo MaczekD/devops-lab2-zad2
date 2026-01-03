@@ -46,7 +46,7 @@ jobs:
 
       - name: Build app
         run: |
-          mkdir build
+          mkdir -p build
           cp -r app build/
 
       - name: Upload artifact
