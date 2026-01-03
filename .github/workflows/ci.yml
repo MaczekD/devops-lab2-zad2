@@ -54,3 +54,12 @@ jobs:
         with:
           name: build-${{ matrix.python-version }}
           path: build/
+
+      - name: Notify on failure
+        if: failure()
+        env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d '{"content":"❌ CI FAILED in devops-lab2-zad2"}' \
+          $WEBHOOK_URL
